@@ -2,7 +2,8 @@ import getCity from "./get_city";
 
 it("works with promises", () => {
   return getCity()
-    .then((city) => expect(city.name).toEqual("São Leopoldo"));
+    .then((city) =>
+      expect(city.name).toEqual("São Leopoldo"));
 });
 
 it("works with async await", async () => {

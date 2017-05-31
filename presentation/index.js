@@ -25,8 +25,7 @@ require("normalize.css");
 require("spectacle/lib/themes/default/index.css");
 
 const images = {
-  city: require("../assets/city.jpg"),
-  kat: require("../assets/kat.png"),
+  testFailed: require("../assets/test_failed.jpg"),
   jestLogo: require("../assets/jest-logo.svg"),
   markdown: require("../assets/markdown.png")
 };
@@ -34,8 +33,8 @@ const images = {
 preloader(images);
 
 const theme = createTheme({
-  primary: "white",
-  secondary: "#1F2022",
+  primary: "#333",
+  secondary: "#FFF",
   tertiary: "#03A9FC",
   quartenary: "#CECECE"
 }, {
@@ -43,6 +42,8 @@ const theme = createTheme({
   secondary: "Helvetica"
 });
 
+const borderRight = { borderRightColor: "#FFF", borderRightWidth: 1, borderRightStyle: "solid" };
+const codePaneMedium = { fontSize: 16 };
 
 export default class Presentation extends React.Component {
   render() {
@@ -65,15 +66,15 @@ export default class Presentation extends React.Component {
       <Deck transition={["zoom", "slide"]} transitionDuration={500} theme={theme}>
         <Slide transition={["zoom"]} bgColor="primary">
           <Image src={images.jestLogo} />
-          <Heading size={1} caps lineHeight={1} textColor="#000">JEST</Heading>
+          <Heading size={1} caps lineHeight={1} textColor="secondary">JEST</Heading>
           <Text margin="20px 0 0 0" textColor="tertiary" size={3} bold>
             André Luís Junges <br />
             Leonardo pacheco
           </Text>
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="tertiary">
-          <Heading size={6} textColor="primary" caps>Why JEST?</Heading>
+        <Slide transition={["fade"]} bgColor="primary">
+          <Heading size={3} textColor="tertiary" caps>Why JEST?</Heading>
           <List>
             <Appear><ListItem>Easy to setup</ListItem></Appear>
             <Appear><ListItem>Watch mode</ListItem></Appear>
@@ -86,8 +87,8 @@ export default class Presentation extends React.Component {
           </List>
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="tertiary">
-          <Heading size={6} margin="0 0 50px 0" textColor="primary" caps>Matches</Heading>
+        <Slide transition={["fade"]} bgColor="quartenary">
+          <Heading size={3} textColor="tertiary" margin="0 0 50px 0" caps>Matches</Heading>
           <Layout>
             <Fill>
               {matchesLeft.map((match, i) =>
@@ -128,49 +129,63 @@ export default class Presentation extends React.Component {
           </Layout>
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="tertiary">
-          <Heading size={6} textColor="primary" caps>SETUP</Heading>
+        <Slide transition={["fade"]} bgColor="quartenary">
+          <Heading size={3} textColor="tertiary" caps>SETUP</Heading>
 
-          <Text margin="40px 0 10px 0" textSize={22} textColor="primary" caps>INSTALLING</Text>
-          <CodePane>yarn add --dev jest</CodePane>
+          <Text margin="40px 0 10px 0" textSize={26} textColor="primary" caps>INSTALLING</Text>
+          <CodePane
+            source="yarn add --dev jest"
+            style={{ fontSize: 20 }}
+          />
 
-          <Text margin="40px 0 10px 0" textSize={22} textColor="primary" caps>SETTING UP PACKAGE.JSON</Text>
-          <CodePane>{`{ "test": "jest --coverage", "test:watch": "jest --watch" }`}</CodePane>
+          <Text margin="40px 0 10px 0" textSize={26} textColor="primary" caps>SETTING UP PACKAGE.JSON</Text>
+          <CodePane
+            source='{ "test": "jest --coverage", "test:watch": "jest --watch" }'
+            style={{ fontSize: 20 }}
+          />
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="tertiary">
-          <Text margin="40px 0 10px 0" textSize={22} textColor="primary" caps>FIRST TEST</Text>
+        <Slide id="first-test" transition={["fade"]} bgColor="primary">
+          <Heading size={3} textColor="tertiary" margin="0 0 50px 0" caps>FIRST TEST</Heading>
           <Layout>
             <Fill>
-              <Text textSize={22} textColor="accent">sum.js</Text>
+              <Text textSize={26} textColor="accent">sum.js</Text>
               <CodePane
                 lang="javascript"
                 source={require("raw-loader!../assets/code/sum.js")}
-                style={{ borderRightColor: "#03A9FC", borderRightWidth: 1, borderRightStyle: "solid" }}
+                style={{ ...borderRight, ...codePaneMedium }}
               />
             </Fill>
             <Fill>
-              <Text textSize={22} textColor="accent">sum.test.js</Text>
-              <CodePane lang="javascript" source={require("raw-loader!../assets/code/sum.test.js")} />
+              <Text textSize={26} textColor="accent">sum.test.js</Text>
+              <CodePane
+                lang="javascript"
+                source={require("raw-loader!../assets/code/sum.test.js")}
+                style={codePaneMedium}
+              />
             </Fill>
           </Layout>
         </Slide>
 
 
-        <Slide transition={["fade"]} bgColor="tertiary">
-          <Text margin="40px 0 10px 0" textSize={22} textColor="primary" caps>ASYNC SUPPORT</Text>
+        <Slide transition={["fade"]} bgColor="primary">
+          <Heading size={3} textColor="tertiary" margin="0 0 50px 0" caps>ASYNC SUPPORT</Heading>
           <Layout>
             <Fill>
-              <Text textSize={22} textColor="accent">get_city.js</Text>
+              <Text textSize={26} textColor="accent">get_city.js</Text>
               <CodePane
                 lang="javascript"
                 source={require("raw-loader!../assets/code/get_city.js")}
-                style={{ borderRightColor: "#03A9FC", borderRightWidth: 1, borderRightStyle: "solid" }}
+                style={{ ...borderRight, ...codePaneMedium }}
               />
             </Fill>
             <Fill>
-              <Text textSize={22} textColor="accent">get_city.test.js</Text>
-              <CodePane lang="javascript" source={require("raw-loader!../assets/code/get_city.test.js")} />
+              <Text textSize={26} textColor="accent">get_city.test.js</Text>
+              <CodePane
+                lang="javascript"
+                source={require("raw-loader!../assets/code/get_city.test.js")}
+                style={codePaneMedium}
+              />
             </Fill>
           </Layout>
         </Slide>

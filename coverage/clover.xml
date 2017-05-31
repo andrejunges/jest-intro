@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1496272428579" clover="3.2.0">
+  <project timestamp="1496272428579" name="All files">
+    <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="1" methods="8" coveredmethods="8" elements="23" coveredelements="22" complexity="0" loc="13" ncloc="13" packages="1" files="3" classes="3">
+      <file name="get_city.js" path="/Users/andrejunges/Documents/Projects/oss/jest-intro/assets/code/get_city.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+      </file>
+      <file name="link.react.js" path="/Users/andrejunges/Documents/Projects/oss/jest-intro/assets/code/link.react.js">
+        <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="4"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+      </file>
+      <file name="sum.js" path="/Users/andrejunges/Documents/Projects/oss/jest-intro/assets/code/sum.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+      </file>
+    </metrics>
+  </project>
+</coverage>
