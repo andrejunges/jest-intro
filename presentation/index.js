@@ -1,5 +1,7 @@
 import React from "react";
 import {
+  Appear,
+  Code,
   CodePane,
   Deck,
   Fill,
@@ -44,6 +46,21 @@ const theme = createTheme({
 
 export default class Presentation extends React.Component {
   render() {
+    const matchesLeft = [
+      ".toBe",
+      ".toEqual",
+      ".not.toBe",
+      ".toBeNull",
+      ".toBeUndefined",
+      ".toBeDefined",
+      ".toBeTruthy",
+      ".toBeFalsy"
+    ];
+    const matchesNumber = [".toBeGreaterThan", ".toBeLessThan"];
+    const matchesString = [".not.toMatch", ".toMatch"];
+    const matchesArray = [".toContain"];
+    const matchesExceptions = [".toThrow"];
+
     return (
       <Deck transition={["zoom", "slide"]} transitionDuration={500} theme={theme}>
         <Slide transition={["zoom"]} bgColor="primary">
@@ -58,15 +75,57 @@ export default class Presentation extends React.Component {
         <Slide transition={["fade"]} bgColor="tertiary">
           <Heading size={6} textColor="primary" caps>Why JEST?</Heading>
           <List>
-            <ListItem>Easy to setup</ListItem>
-            <ListItem>Watch mode</ListItem>
-            <ListItem>Coverage out of the box</ListItem>
-            <ListItem>Support for promise and async/await</ListItem>
-            <ListItem>Work with Babel</ListItem>
-            <ListItem>Run tests in parallel</ListItem>
-            <ListItem>Snapshot testing</ListItem>
-            <ListItem>Works everywhere (backend, frontend, react-native)</ListItem>
+            <Appear><ListItem>Easy to setup</ListItem></Appear>
+            <Appear><ListItem>Watch mode</ListItem></Appear>
+            <Appear><ListItem>Coverage out of the box</ListItem></Appear>
+            <Appear><ListItem>Support for promise and async/await</ListItem></Appear>
+            <Appear><ListItem>Work with Babel</ListItem></Appear>
+            <Appear><ListItem>Run tests in parallel</ListItem></Appear>
+            <Appear><ListItem>Snapshot testing</ListItem></Appear>
+            <Appear><ListItem>Works everywhere (backend, frontend, react-native)</ListItem></Appear>
           </List>
+        </Slide>
+
+        <Slide transition={["fade"]} bgColor="tertiary">
+          <Heading size={6} margin="0 0 50px 0" textColor="primary" caps>Matches</Heading>
+          <Layout>
+            <Fill>
+              {matchesLeft.map((match, i) =>
+                <div key={i} style={{ width: "auto", textAlign: "left" }}>
+                  <Code style={{ fontSize: 20 }}>{match}</Code>
+                </div>
+              )}
+            </Fill>
+            <Fill>
+              <Text margin="10px 0 0" style={{ textAlign: "left" }} textSize={22} textColor="primary" caps>NUMBERS</Text>
+              {matchesNumber.map((match, i) =>
+                <div key={i} style={{ width: "auto", textAlign: "left" }}>
+                  <Code style={{ fontSize: 20 }}>{match}</Code>
+                </div>
+              )}
+
+              <Text margin="10px 0 0" style={{ textAlign: "left" }} textSize={22} textColor="primary" caps>STRINGS</Text>
+              {matchesString.map((match, i) =>
+                <div key={i} style={{ width: "auto", textAlign: "left" }}>
+                  <Code style={{ fontSize: 20 }}>{match}</Code>
+                </div>
+              )}
+
+              <Text margin="10px 0 0" style={{ textAlign: "left" }} textSize={22} textColor="primary" caps>ARRAYS</Text>
+              {matchesArray.map((match, i) =>
+                <div key={i} style={{ width: "auto", textAlign: "left" }}>
+                  <Code style={{ fontSize: 20 }}>{match}</Code>
+                </div>
+              )}
+
+              <Text margin="10px 0 0" style={{ textAlign: "left" }} textSize={22} textColor="primary" caps>EXCEPTIONS</Text>
+              {matchesExceptions.map((match, i) =>
+                <div key={i} style={{ width: "auto", textAlign: "left" }}>
+                  <Code style={{ fontSize: 20 }}>{match}</Code>
+                </div>
+              )}
+            </Fill>
+          </Layout>
         </Slide>
 
         <Slide transition={["fade"]} bgColor="tertiary">
@@ -77,7 +136,9 @@ export default class Presentation extends React.Component {
 
           <Text margin="40px 0 10px 0" textSize={22} textColor="primary" caps>SETTING UP PACKAGE.JSON</Text>
           <CodePane>{`{ "test": "jest --coverage", "test:watch": "jest --watch" }`}</CodePane>
+        </Slide>
 
+        <Slide transition={["fade"]} bgColor="tertiary">
           <Text margin="40px 0 10px 0" textSize={22} textColor="primary" caps>FIRST TEST</Text>
           <Layout>
             <Fill>
@@ -93,6 +154,49 @@ export default class Presentation extends React.Component {
               <CodePane lang="javascript" source={require("raw-loader!../assets/code/sum.test.js")} />
             </Fill>
           </Layout>
+        </Slide>
+
+
+        <Slide transition={["fade"]} bgColor="tertiary">
+          <Text margin="40px 0 10px 0" textSize={22} textColor="primary" caps>ASYNC SUPPORT</Text>
+          <Layout>
+            <Fill>
+              <Text textSize={22} textColor="accent">get_city.js</Text>
+              <CodePane
+                lang="javascript"
+                source={require("raw-loader!../assets/code/get_city.js")}
+                style={{ borderRightColor: "#03A9FC", borderRightWidth: 1, borderRightStyle: "solid" }}
+              />
+            </Fill>
+            <Fill>
+              <Text textSize={22} textColor="accent">get_city.test.js</Text>
+              <CodePane lang="javascript" source={require("raw-loader!../assets/code/get_city.test.js")} />
+            </Fill>
+          </Layout>
+        </Slide>
+
+        <Slide transition={["fade"]} bgColor="tertiary">
+          <Text margin="-50px 0 10px 0" textSize={32} textColor="primary" caps>SNAPSHOT TESTING -> CODE</Text>
+          <CodePane
+            lang="javascript"
+            source={require("raw-loader!../assets/code/link.react.js")}
+            style={{ fontSize: 10 }}
+          />
+        </Slide>
+
+        <Slide transition={["fade"]} bgColor="tertiary">
+          <Text margin="-50px 0 10px 0" textSize={32} textColor="primary" caps>SNAPSHOT TESTING -> TEST</Text>
+          <CodePane
+            lang="javascript"
+            source={require("raw-loader!../assets/code/link.react.test.js")}
+          />
+        </Slide>
+
+        <Slide transition={["fade"]} bgColor="tertiary">
+          <Text margin="-50px 0 10px 0" textSize={32} textColor="primary" caps>SNAPSHOT TESTING -> SNAPSHOT</Text>
+          <CodePane
+            source={require("raw-loader!../assets/code/__snapshots__/link.react.test.js.snap")}
+          />
         </Slide>
         {/* <Slide transition={["zoom"]} bgColor="primary">
           <Heading size={1} fit caps lineHeight={1} textColor="secondary">
