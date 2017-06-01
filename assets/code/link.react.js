@@ -1,30 +1,18 @@
 import React from "react";
 
-const STATUS = {
-  HOVERED: "hovered",
-  NORMAL: "normal"
-};
-
 export default class Link extends React.Component {
   constructor(props) {
     super(props);
-
     this._onMouseEnter = this._onMouseEnter.bind(this);
     this._onMouseLeave = this._onMouseLeave.bind(this);
-
-    this.state = {
-      class: STATUS.NORMAL
-    };
+    this.state = { class: "normal" };
   }
-
   _onMouseEnter() {
-    this.setState({ class: STATUS.HOVERED });
+    this.setState({ class: "hovered" });
   }
-
   _onMouseLeave() {
-    this.setState({ class: STATUS.NORMAL });
+    this.setState({ class: "normal" });
   }
-
   render() {
     return (
       <a

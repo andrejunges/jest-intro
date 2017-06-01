@@ -6,6 +6,7 @@ import {
   Deck,
   Fill,
   Image,
+  Link,
   Layout,
   List,
   ListItem,
@@ -27,7 +28,6 @@ require("spectacle/lib/themes/default/index.css");
 const images = {
   testFailed: require("../assets/test_failed.jpg"),
   jestLogo: require("../assets/jest-logo.svg"),
-  markdown: require("../assets/markdown.png")
 };
 
 preloader(images);
@@ -45,8 +45,28 @@ const theme = createTheme({
 const borderRight = { borderRightColor: "#FFF", borderRightWidth: 1, borderRightStyle: "solid" };
 const codePaneMedium = { fontSize: 16 };
 
+const getMatchText = text =>
+  <Text caps textColor="secondary" style={{ textAlign: "left", fontSize: 22, margin: "10px 0 0" }}>
+    {text}
+  </Text>;
+
+const getMatchesCode = (match, i) =>
+  <div key={i} style={{ width: "auto", textAlign: "left" }}>
+    <Code style={{ fontSize: 20, color: "#ccc" }}>{match}</Code>
+  </div>
+
 export default class Presentation extends React.Component {
   render() {
+    const features = [
+      "Easy to setup",
+      "Watch mode",
+      "Coverage out of the box",
+      "Support for promise and async/await",
+      "Work with Babel",
+      "Run tests in parallel",
+      "Snapshot testing",
+      "Works everywhere",
+    ];
     const matchesLeft = [
       ".toBe",
       ".toEqual",
@@ -61,86 +81,88 @@ export default class Presentation extends React.Component {
     const matchesString = [".not.toMatch", ".toMatch"];
     const matchesArray = [".toContain"];
     const matchesExceptions = [".toThrow"];
+    const snapshotInfos = [
+      "Make sure UI doesn't change unexpectedly",
+      "Store serializable value for your React tree"
+    ];
 
     return (
       <Deck transition={["zoom", "slide"]} transitionDuration={500} theme={theme}>
-        <Slide transition={["zoom"]} bgColor="primary">
+        <Slide id="cape" transition={["zoom"]} bgColor="primary">
           <Image src={images.jestLogo} />
           <Heading size={1} caps lineHeight={1} textColor="secondary">JEST</Heading>
           <Text margin="20px 0 0 0" textColor="tertiary" size={3} bold>
             André Luís Junges <br />
-            Leonardo pacheco
+            Leonardo Pacheco
           </Text>
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="primary">
+        <Slide id="features" transition={["fade"]} bgColor="primary">
           <Heading size={3} textColor="tertiary" caps>Why JEST?</Heading>
           <List>
-            <Appear><ListItem>Easy to setup</ListItem></Appear>
-            <Appear><ListItem>Watch mode</ListItem></Appear>
-            <Appear><ListItem>Coverage out of the box</ListItem></Appear>
-            <Appear><ListItem>Support for promise and async/await</ListItem></Appear>
-            <Appear><ListItem>Work with Babel</ListItem></Appear>
-            <Appear><ListItem>Run tests in parallel</ListItem></Appear>
-            <Appear><ListItem>Snapshot testing</ListItem></Appear>
-            <Appear><ListItem>Works everywhere (backend, frontend, react-native)</ListItem></Appear>
+            {features.map((feature, i) =>
+              <Appear key={i}>
+                <ListItem>{feature}</ListItem>
+              </Appear>
+            )}
           </List>
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="quartenary">
+        <Slide id="matches" transition={["fade"]} bgColor="primary">
           <Heading size={3} textColor="tertiary" margin="0 0 50px 0" caps>Matches</Heading>
           <Layout>
             <Fill>
-              {matchesLeft.map((match, i) =>
-                <div key={i} style={{ width: "auto", textAlign: "left" }}>
-                  <Code style={{ fontSize: 20 }}>{match}</Code>
+              <Appear>
+                <div>
+                  {getMatchText("General")}
+                  {matchesLeft.map(getMatchesCode)}
                 </div>
-              )}
+              </Appear>
             </Fill>
             <Fill>
-              <Text margin="10px 0 0" style={{ textAlign: "left" }} textSize={22} textColor="primary" caps>NUMBERS</Text>
-              {matchesNumber.map((match, i) =>
-                <div key={i} style={{ width: "auto", textAlign: "left" }}>
-                  <Code style={{ fontSize: 20 }}>{match}</Code>
+              <Appear>
+                <div>
+                  {getMatchText("Numbers")}
+                  {matchesNumber.map(getMatchesCode)}
                 </div>
-              )}
+              </Appear>
 
-              <Text margin="10px 0 0" style={{ textAlign: "left" }} textSize={22} textColor="primary" caps>STRINGS</Text>
-              {matchesString.map((match, i) =>
-                <div key={i} style={{ width: "auto", textAlign: "left" }}>
-                  <Code style={{ fontSize: 20 }}>{match}</Code>
+              <Appear>
+                <div>
+                  {getMatchText("String (Regex..)")}
+                  {matchesString.map(getMatchesCode)}
                 </div>
-              )}
+              </Appear>
 
-              <Text margin="10px 0 0" style={{ textAlign: "left" }} textSize={22} textColor="primary" caps>ARRAYS</Text>
-              {matchesArray.map((match, i) =>
-                <div key={i} style={{ width: "auto", textAlign: "left" }}>
-                  <Code style={{ fontSize: 20 }}>{match}</Code>
+              <Appear>
+                <div>
+                  {getMatchText("Arrays")}
+                  {matchesArray.map(getMatchesCode)}
                 </div>
-              )}
+              </Appear>
 
-              <Text margin="10px 0 0" style={{ textAlign: "left" }} textSize={22} textColor="primary" caps>EXCEPTIONS</Text>
-              {matchesExceptions.map((match, i) =>
-                <div key={i} style={{ width: "auto", textAlign: "left" }}>
-                  <Code style={{ fontSize: 20 }}>{match}</Code>
+              <Appear>
+                <div>
+                  {getMatchText("Exceptions")}
+                  {matchesExceptions.map(getMatchesCode)}
                 </div>
-              )}
+              </Appear>
             </Fill>
           </Layout>
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="quartenary">
+        <Slide id="setup" transition={["fade"]} bgColor="primary">
           <Heading size={3} textColor="tertiary" caps>SETUP</Heading>
 
-          <Text margin="40px 0 10px 0" textSize={26} textColor="primary" caps>INSTALLING</Text>
+          <Text margin="40px 0 10px 0" textSize={26} textColor="secondary" caps>INSTALLING</Text>
           <CodePane
             source="yarn add --dev jest"
             style={{ fontSize: 20 }}
           />
 
-          <Text margin="40px 0 10px 0" textSize={26} textColor="primary" caps>SETTING UP PACKAGE.JSON</Text>
+          <Text margin="40px 0 10px 0" textSize={26} textColor="secondary" caps>SETTING UP PACKAGE.JSON</Text>
           <CodePane
-            source='{ "test": "jest --coverage", "test:watch": "jest --watch" }'
+            source={require("raw-loader!../assets/code/packagejson-scripts")}
             style={{ fontSize: 20 }}
           />
         </Slide>
@@ -167,8 +189,7 @@ export default class Presentation extends React.Component {
           </Layout>
         </Slide>
 
-
-        <Slide transition={["fade"]} bgColor="primary">
+        <Slide id="async-test" transition={["fade"]} bgColor="primary">
           <Heading size={3} textColor="tertiary" margin="0 0 50px 0" caps>ASYNC SUPPORT</Heading>
           <Layout>
             <Fill>
@@ -190,61 +211,73 @@ export default class Presentation extends React.Component {
           </Layout>
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="tertiary">
-          <Text margin="-50px 0 10px 0" textSize={32} textColor="primary" caps>SNAPSHOT TESTING -> CODE</Text>
+        <Slide id="snapshot-intro" transition={["fade"]} bgColor="primary">
+          <Heading size={3} textColor="tertiary" margin="0 0 50px 0" caps>SNAPSHOT TESTING</Heading>
+          <List>
+            {snapshotInfos.map((info, i) =>
+              <Appear key={i}>
+                <ListItem textSize="36">{info}</ListItem>
+              </Appear>
+            )}
+          </List>
+        </Slide>
+
+        <Slide id="snapshot-code" transition={["fade"]} bgColor="primary">
+          <Heading size={3} textColor="tertiary" margin="0 0 30px 0" caps>SNAPSHOT TESTS</Heading>
           <CodePane
-            lang="javascript"
+            lang="jsx"
             source={require("raw-loader!../assets/code/link.react.js")}
-            style={{ fontSize: 10 }}
+            style={{ fontSize: 13 }}
           />
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="tertiary">
-          <Text margin="-50px 0 10px 0" textSize={32} textColor="primary" caps>SNAPSHOT TESTING -> TEST</Text>
+        <Slide id="snapshot-test" transition={["fade"]} bgColor="primary">
+          <Heading size={3} textColor="tertiary" margin="0 0 50px 0" caps>SNAPSHOT TESTS</Heading>
           <CodePane
             lang="javascript"
             source={require("raw-loader!../assets/code/link.react.test.js")}
+            style={{ fontSize: 14 }}
           />
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="tertiary">
-          <Text margin="-50px 0 10px 0" textSize={32} textColor="primary" caps>SNAPSHOT TESTING -> SNAPSHOT</Text>
+        <Slide id="snapshot" transition={["fade"]} bgColor="primary">
+          <Heading size={3} textColor="tertiary" margin="-60px 0 10px 0" caps>SNAPSHOT</Heading>
           <CodePane
             source={require("raw-loader!../assets/code/__snapshots__/link.react.test.js.snap")}
           />
         </Slide>
-        {/* <Slide transition={["zoom"]} bgColor="primary">
-          <Heading size={1} fit caps lineHeight={1} textColor="secondary">
-            Spectacle Boilerplate
-          </Heading>
-          <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
-            open the presentation/index.js file to get started
-          </Text>
+
+        <Slide id="snapshot-comparison" transition={["fade"]} bgColor="primary">
+          <Heading size={3} textColor="tertiary" margin="0 0 30px 0" caps>TESTS COMPARISON</Heading>
+          <Layout>
+            <Fill>
+              <CodePane
+                lang="javascript"
+                source={require("raw-loader!../assets/code/without_snapshot.js")}
+                style={{ ...borderRight, fontSize: 15 }}
+              />
+            </Fill>
+            <Fill>
+              <CodePane
+                lang="javascript"
+                source={require("raw-loader!../assets/code/with_snapshot.js")}
+                style={{ fontSize: 15 }}
+              />
+            </Fill>
+          </Layout>
         </Slide>
-        <Slide transition={["fade"]} bgColor="tertiary">
-          <Heading size={6} textColor="primary" caps>Typography</Heading>
-          <Heading size={1} textColor="secondary">Heading 1</Heading>
-          <Heading size={2} textColor="secondary">Heading 2</Heading>
-          <Heading size={3} textColor="secondary">Heading 3</Heading>
-          <Heading size={4} textColor="secondary">Heading 4</Heading>
-          <Heading size={5} textColor="secondary">Heading 5</Heading>
-          <Text size={6} textColor="secondary">Standard text</Text>
-        </Slide>
-        <Slide transition={["fade"]} bgColor="primary" textColor="tertiary">
-          <Heading size={6} textColor="secondary" caps>Standard List</Heading>
+
+        <Slide id="migrating" transition={["fade"]} bgColor="primary">
+          <Heading size={3} textColor="tertiary" margin="0 0 50px 0" caps>MIGRATING TO JEST</Heading>
           <List>
-            <ListItem>Item 1</ListItem>
-            <ListItem>Item 2</ListItem>
-            <ListItem>Item 3</ListItem>
-            <ListItem>Item 4</ListItem>
+            <ListItem>
+              <Link href="https://github.com/skovhus/jest-codemods" target="_blank">jest-codemods</Link>
+            </ListItem>
+            <ListItem>
+              <Link href="http://facebook.github.io/jest/" target="_blank">jest website</Link>
+            </ListItem>
           </List>
         </Slide>
-        <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-          <BlockQuote>
-            <Quote>Example Quote</Quote>
-            <Cite>Author</Cite>
-          </BlockQuote>
-        </Slide> */}
       </Deck>
     );
   }
