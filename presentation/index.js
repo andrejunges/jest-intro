@@ -27,6 +27,8 @@ require("spectacle/lib/themes/default/index.css");
 
 const images = {
   testFailed: require("../assets/test_failed.jpg"),
+  testSuccess: require("../assets/test_success.jpg"),
+  testCoverage: require("../assets/test_coverage.jpg"),
   jestLogo: require("../assets/jest-logo.svg"),
 };
 
@@ -44,6 +46,7 @@ const theme = createTheme({
 
 const borderRight = { borderRightColor: "#FFF", borderRightWidth: 1, borderRightStyle: "solid" };
 const codePaneMedium = { fontSize: 16 };
+const imageStyle = { width: "500px", boxShadow: "2px 2px 5px #666", margin: "10px" }
 
 const getMatchText = text =>
   <Text caps textColor="secondary" style={{ textAlign: "left", fontSize: 22, margin: "10px 0 0" }}>
@@ -207,6 +210,19 @@ export default class Presentation extends React.Component {
                 source={require("raw-loader!../assets/code/get_city.test.js")}
                 style={codePaneMedium}
               />
+            </Fill>
+          </Layout>
+        </Slide>
+
+        <Slide id="screenshots" transition={["fade"]} bgColor="primary">
+          <Heading size={3} textColor="tertiary" margin="0 0 50px 0" caps>HOW IT LOOKS LIKE</Heading>
+          <Layout>
+            <Fill>
+              <Image style={imageStyle} src={images.testSuccess} />
+              <Image style={imageStyle} src={images.testCoverage} />
+            </Fill>
+            <Fill>
+              <Image style={imageStyle} src={images.testFailed} />
             </Fill>
           </Layout>
         </Slide>
