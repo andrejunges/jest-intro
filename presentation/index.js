@@ -60,6 +60,13 @@ const getMatchesCode = (match, i) =>
 
 export default class Presentation extends React.Component {
   render() {
+    const factsAboutJest = [
+      "Battery included test framework",
+      "Created by Facebook in 2014",
+      "Used by companies such as Twitter, IBM, Pinterest, Paypal, Spotify, eBay and Globo.",
+      "Blazing fast: 47s for Karma against 18s for Jest! Same code, same tests."
+    ];
+
     const features = [
       "Easy to setup",
       "Watch mode",
@@ -98,6 +105,17 @@ export default class Presentation extends React.Component {
             André Luís Junges <br />
             Leonardo Pacheco
           </Text>
+        </Slide>
+
+        <Slide id="history" transition={["fade"]} bgColor="primary">
+          <Heading size={3} textColor="tertiary" caps>What is JEST?</Heading>
+          <List>
+            {factsAboutJest.map((fact, i) =>
+              <Appear key={i}>
+                <ListItem>{fact}</ListItem>
+              </Appear>
+            )}
+          </List>
         </Slide>
 
         <Slide id="features" transition={["fade"]} bgColor="primary">
