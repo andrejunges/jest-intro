@@ -64,7 +64,8 @@ export default class Presentation extends React.Component {
       "Battery included test framework",
       "Created by Facebook in 2014",
       "Used by companies such as Twitter, IBM, Pinterest, Paypal, Spotify, eBay and Globo.",
-      "Blazing fast: 47s for Karma against 18s for Jest! Same code, same tests."
+      "Blazing fast: 47s for Karma against 18s for Jest! Same code, same tests.",
+      "Has the hability to run on multiple projects at the same time"
     ];
 
     const features = [
